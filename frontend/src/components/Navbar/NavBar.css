@@ -1,0 +1,27 @@
+.navbar{
+    display: flex;
+    justify-content: space-around;
+    width: auto;
+    background-color: rgb(151, 151, 151);
+    font-size: 2rem;
+    text-decoration: none;
+    margin-bottom: 3rem;
+}
+
+.link {
+    text-decoration: none;
+    color: black;
+}
+
+.nav-item {
+    padding: 1rem;
+    text-align: center;
+    width: 33.3%;
+    transition: all 0.2s;
+
+}
+
+.nav-item:hover {
+    color: white;
+    background-color: rgb(179, 178, 178)
+}

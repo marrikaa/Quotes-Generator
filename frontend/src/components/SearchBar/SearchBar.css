@@ -1,0 +1,16 @@
+.search-bar{
+    margin: 1rem
+};
+
+.search-button {
+    width: 20rem;
+    height: 5rem;
+    background-color: black;
+}
+
+.search-input{
+    width: 20rem;
+    height: 2rem;
+    border-radius: .5rem;
+    font-size: larger;
+}
