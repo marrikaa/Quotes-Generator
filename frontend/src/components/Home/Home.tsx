@@ -16,9 +16,6 @@ const Home = (props :PropType) => {
 
   const setQuotes = async () => await setQuotesArray(await getQuotes());
 
-
- 
-
   useEffect(() => {
     setQuotes();
   } ,[])
