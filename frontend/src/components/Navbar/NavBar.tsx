@@ -19,8 +19,8 @@ const NavBar = (props : PropType) => {
      <Link to='/search' className='link nav-item'><div >Search</div></Link>
      {!isLogin&&<Link to='/register' className='link nav-item'><div > Register</div></Link>}
      {!isLogin&&<Link to='/login' className='link nav-item'><div > Login</div></Link>}
-     {isLogin&&<Link to='/quotesList' className='link nav-item'><div > My Qoutes List</div></Link>}
-     {isLogin&&<div className='nav-item' onClick={logOutHandler}> Log out</div>}
+     {isLogin&&<Link to='/quotesList' className='link nav-item'><div > My Qoutes</div></Link>}
+     {isLogin&&<Link to='/'className='nav-item link'> <div onClick={logOutHandler}> Log out</div></Link>}
     </div>
   )
 }

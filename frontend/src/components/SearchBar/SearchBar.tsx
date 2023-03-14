@@ -15,7 +15,7 @@ const SearchBar = (props : PropType) => {
     return (
     <div className='search-bar'>
         <input className='search-input' onChange={quoteSearchHandler} type='text' placeholder= " " />
-        <button className='search-button' onClick ={searchHandler}> Search 🔍</button>
+        <button className='search-button' onClick ={searchHandler}>🔍</button>
     </div> 
 )}
 

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { deleteQuotes, getUsersQuotes } from '../../Client/client';
 import { QuotesType } from '../../types';
 import Quotes from '../Quotes/Quotes';
+import './FavQuotesList.css'
 
 type PropType = {
     userName:string
@@ -24,18 +25,14 @@ const FavQuotesList = (props :PropType) => {
 
     return (
       <div className="App">
-        <header>
-          <h1>My favourite qoutes list</h1>
-      </header>
-        <body className="App-header" >
-           <div id="quote-box" >
+        <p className="fav-quotes">My favourite qoutes list</p>
+        <body className="App-header fav-body" >
             {quotesArray && quotesArray.map((quotes : QuotesType) => 
             <Quotes 
                 quote={quotes} 
                 isLogin={true} 
                 isForFav={true} 
                 removeCklickHandler={removeCklickHandler} />)}
-        </div>
         </body>
       </div>
     )

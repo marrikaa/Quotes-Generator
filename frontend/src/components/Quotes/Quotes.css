@@ -1,14 +1,33 @@
-.Quotes {
-    border: .1rem solid  rgb(225, 225, 225);
+.quotes {
+    border: 0.1px solid rgb(245, 215, 175);
     margin: 1.5rem;
-    width: 60rem;
+    width: 40vh;
     border-radius: 1rem;
-    box-shadow: 1px 1px 1px 1px rgb(211, 211, 211);
-    background-color: rgb(225, 225, 225);
+    box-shadow: 6px 6px 6px rgb(211, 196, 176);
+    font-size: medium;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    background-color:rgb(247, 225, 213);
+    padding: 1rem;
 }
-
+.quotes:hover {
+    background-color:rgb(252, 231, 219);
+    box-shadow: 6px 6px 3px rgb(211, 196, 176);;
+}
 .quote-button{
     margin-top: -.5rem;
 }
 
+@media screen and (min-width: 700px) {
+    .quotes {
+        font-size: large;
+        width: 50vh;
+    }
+}
 
+
+@media screen and (min-width: 900px) {
+    .quotes {   
+        font-size: large;
+        width: 80vh;
+    }
+}

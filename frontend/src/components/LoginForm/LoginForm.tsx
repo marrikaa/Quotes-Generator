@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { getUsers } from '../../Client/client';
 import InputField from '../InputField/InputField'
 import { User } from '../../types';
+import './LoginForm.css'
 
 type PropType = {
   isLogin : boolean;
@@ -21,7 +22,7 @@ export const LoginForm = (props : PropType) => {
   useEffect(()=> {
     getUsersFromData()
    } ,[])
-   
+
   const buttonHandler = () => {
     if(users.filter((u :User) => u.userName === user && u.password === password).length === 1 ){
       setUserName(user);
@@ -34,7 +35,7 @@ export const LoginForm = (props : PropType) => {
   return (
     <div>
      {!isLogin&&<InputField setUserName={setUser} setPassword={setPassword} buttonHandler={buttonHandler} formName='Log in' />}
-      {isLogin && <h1>Welcome to our Quotes Generator</h1>}
+      {isLogin && <p className="user-welcome">Welcome, dear {user}!</p>}
     </div>
   )
 }

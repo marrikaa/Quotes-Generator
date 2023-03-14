@@ -2,6 +2,7 @@ import { METHODS } from 'http';
 import React, { useState } from 'react'
 import InputField from '../InputField/InputField'
 import { postUser } from '../../Client/client'; 
+import './Registration.css'
 
 type PropType = {
   isLogin:boolean;
@@ -19,7 +20,7 @@ const RegistrationForm = (props :PropType) => {
   return (
     <div>
       {!isLogin &&<InputField setUserName={setUser} setPassword={setPassword} buttonHandler={buttonHandler} formName='Register' />}
-      {isLogin && <h1>Registered succesfully, Welcome to our Quotes Generator</h1>}
+      {isLogin && <p className="new-user-welcome">Registered succesfully, Welcome to our Quotes Generator</p>}
     </div>
   )
 }

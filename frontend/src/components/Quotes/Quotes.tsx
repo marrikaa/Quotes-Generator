@@ -18,7 +18,7 @@ const Quotes = (props : PropType) => {
     }
     return (
         <>
-        <div className='Quotes'>
+        <div className='quotes'>
            <h4>{quote.quote}</h4>
            <p>-{quote.author}</p>
         </div>

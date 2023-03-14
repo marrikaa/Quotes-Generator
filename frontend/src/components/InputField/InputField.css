@@ -1,13 +1,17 @@
 .inputField{
-  display: flex;
-  flex-direction: column;
-  margin-left: 32rem;
-  margin-right: 32rem;
-  height: 30rem;
-  padding: 2rem;
-  border-radius: 1rem;
-  box-shadow: 1px 1px 1px 1px rgb(211, 211, 211);
-  background-color: rgb(225, 225, 225);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    border: 0.1px solid rgb(245, 215, 175);
+    margin: 2rem 100px; 
+    border-radius: 1rem;
+    box-shadow: 6px 6px 6px rgb(211, 196, 176);
+    font-size: medium;
+    font-family:'Courier New', Courier, monospace;
+    background-color:rgb(247, 225, 213);
+    color: rgb(44, 44, 44);
+    padding: 2rem;
 }
 
 input{
@@ -25,10 +29,45 @@ label {
 }
 
 button{
-    width: 10rem;
-    margin: 1rem 8rem;
-    height: 2rem;
+    margin: 1rem 5rem;
     border-radius: .5rem;
-    text-align: center;
+    height: 2rem;
+    background-color:white;
+    border: 1px solid;
+}
+button:hover{
+    background-color: rgb(253, 245, 241);
+    box-shadow: 3px 3px 3px rgb(211, 196, 176);
+}
+
+@media screen and (min-width: 700px) {
+    .inputField {
+        margin: 2rem 120px; 
    
+    }
+    button{
+        margin: 1rem rem;
+        height: 2.5rem;
+    }
+}
+
+
+@media screen and (min-width: 900px) {
+    .inputField {
+        margin: 2rem 180px; 
+    }
+    button{
+        margin: 1rem 6rem;
+        height: 2.5rem;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .inputField {
+        margin: 2rem 300px;  
+    }
+    button{
+        margin: 1rem 14rem;
+        height: 3rem;
+    }
 }
