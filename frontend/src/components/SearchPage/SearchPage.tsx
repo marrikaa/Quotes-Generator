@@ -32,7 +32,7 @@ const SearchPage = (props :PropType) => {
     </header>
       <body className="App-header" >
           <div id="quote-box" >
-          {searchResult.map((quotes : QuotesType) => <Quotes quote={quotes} isLogin={isLogin} isForFav={false} name={userName} />)}
+          {searchResult.map((quotes : QuotesType) => <Quotes quote={quotes} isLogin={isLogin} isForHome={false} isForFav={false} name={userName} />)}
       </div>
       </body>
     </div>

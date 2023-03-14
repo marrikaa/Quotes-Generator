@@ -21,11 +21,11 @@ const InputField = (props : PropType ) => {
   return (
     <div className='inputField'>
         <h2>{formName} Form <hr /></h2>
-        <label htmlFor='userName'><b>User Name</b></label>
+        <label><b>User Name</b></label>
         <input onChange={userNameHandler} type='text' placeholder='Enter userName'></input>
-        <label htmlFor='lastName'><b>Password</b></label>
-        <input onChange={passwordHandler} id='lastName' type="password" placeholder='Enter password'></input>
-        {formName==="Register"&& <><label htmlFor='lastName'><b>Password</b></label>
+        <label><b>Password</b></label>
+        <input onChange={passwordHandler} type="password" placeholder='Enter password'></input>
+        {formName==="Registration"&& <><label ><b>Confirm password</b></label>
         <input onChange={passwordHandler} id='lastName' type="password" placeholder='Enter password'></input></>}
         <button onClick={buttonHandler}>{formName}</button>
   </div>)

@@ -11,10 +11,9 @@ type PropType = {
 
 const Home = (props :PropType) => {
   const {isLogin, userName } = props
-  const [quotesArray, setQuotesArray]=useState<QuotesType[]>([])
-  const randomQuotesArray : QuotesType[] = [];
+  const [quotesArray, setQuotesArray]=useState<QuotesType[]>([]);
 
-  const setQuotes = async () => await setQuotesArray(await getQuotes());
+  const setQuotes = async () => await getQuotes().then(response => setQuotesArray(response));
 
   useEffect(() => {
     setQuotes();
@@ -27,7 +26,7 @@ const Home = (props :PropType) => {
     </header>
       <body className="App-header" >
          <div id="quote-box" >
-          {quotesArray.map((quotes : QuotesType) => <Quotes quote={quotes} isLogin={isLogin} isForFav={false} name={userName}/>)}
+          {quotesArray.map((quotes : QuotesType) => <Quotes quote={quotes} isLogin={isLogin} isForHome={true} isForFav={false} name={userName}/>)}
       </div>
       </body>
     </div>

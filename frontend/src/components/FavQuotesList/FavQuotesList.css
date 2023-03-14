@@ -5,3 +5,48 @@
     color: rgb(56, 54, 54);
 }
 
+.post-Quotes {
+    display: flex;
+    flex-direction: column;
+    margin: 0vh 10vh;
+    padding: 1rem;
+    border-radius: 1rem;
+}
+
+.post-quotes{
+    font-size: 20px;
+    text-align: center;
+    font-family: 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;
+    color: rgb(56, 54, 54);
+}
+
+.author-input{
+    width: auto;
+    height: 2rem;
+    margin-top: 1rem;
+}
+
+textarea{
+    width: auto;
+    height: 10vh;
+    font-size: 20px
+}
+
+@media screen and (min-width: 700px) {
+    .post-Quotes {
+        margin: 0vh 15vh;
+   
+    }
+}
+
+@media screen and (min-width: 900px) {
+    .post-Quotes {
+        margin: 0vh 20vh;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .post-Quotes {
+        margin: 0vh 30vh;
+    }
+}

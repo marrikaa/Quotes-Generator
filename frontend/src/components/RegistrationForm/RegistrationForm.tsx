@@ -1,4 +1,3 @@
-import { METHODS } from 'http';
 import React, { useState } from 'react'
 import InputField from '../InputField/InputField'
 import { postUser } from '../../Client/client'; 
@@ -19,7 +18,7 @@ const RegistrationForm = (props :PropType) => {
   }
   return (
     <div>
-      {!isLogin &&<InputField setUserName={setUser} setPassword={setPassword} buttonHandler={buttonHandler} formName='Register' />}
+      {!isLogin &&<InputField setUserName={setUser} setPassword={setPassword} buttonHandler={buttonHandler} formName='Registration' />}
       {isLogin && <p className="new-user-welcome">Registered succesfully, Welcome to our Quotes Generator</p>}
     </div>
   )

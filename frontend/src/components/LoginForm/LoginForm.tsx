@@ -31,11 +31,12 @@ export const LoginForm = (props : PropType) => {
       alert("userName or password is inccorect");
     }
   }
+  const capitalize = (st :string) :string => st && st[0].toUpperCase() + st.slice(1)
 
   return (
     <div>
-     {!isLogin&&<InputField setUserName={setUser} setPassword={setPassword} buttonHandler={buttonHandler} formName='Log in' />}
-      {isLogin && <p className="user-welcome">Welcome, dear {user}!</p>}
+     {!isLogin&&<InputField setUserName={setUser} setPassword={setPassword} buttonHandler={buttonHandler} formName='Login' />}
+      {isLogin && <p className="user-welcome">Welcome, dear {capitalize(user)}!</p>}
     </div>
   )
 }

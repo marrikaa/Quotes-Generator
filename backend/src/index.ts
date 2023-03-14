@@ -1,8 +1,9 @@
 /* eslint-disable no-console */
 import express from "express";
-import { getUsers, addUser, deleteUser, getOneUser, updateUser, deleteQuote  } from "./db/db";
+import { getUsers, addUser, deleteUser, getOneUser, updateUser, deleteQuote  } from "./Mongo/db";
 import fetch from "node-fetch-commonjs";
 import { User } from "./types";
+import { addQuote, deleteOneQuote, getQuotes } from "./Mongo/dbForQuotes";
 
 type QuotesType ={
   quote : string,
@@ -48,8 +49,9 @@ app.get("/api/users/", async (req, res) => {
 let quoteDB="https://gist.githubusercontent.com/camperbot/5a022b72e96c4c9585c32bf6a75f62d9/raw/e3c6895ce42069f0ee7e991229064f167fe8ccdc/quotes.json";
 app.get("/api/quotes/", async (req, res) => {
   try {
+      const quotes = await getQuotes();
       fetch(quoteDB).then(response => response.json()).then((data: Quotes) => {
-        res.status(200).send(data.quotes);
+        res.status(200).send(data.quotes.concat(quotes));
       })
     } catch (error) {
     res.status(500).json({ message: error.message });
@@ -111,6 +113,33 @@ app.delete("/api/users/:userName/favQuotes", async (req, res) => {
   try {
     const result=await deleteQuote(req.params.userName, req.body);
     res.status(204).json(result).end();
+  } catch (e) {
+    res.status(500).send(e);
+  }
+});
+
+app.get("/api/myQuotes", async (req, res) => {
+  try {
+    const quotes = await getQuotes();
+    res.status(200).json(quotes).end();
+  } catch (e) {
+    res.status(500).send(e);
+  }
+});
+
+app.post("/api/myQuotes", async (req, res) => {
+  try {
+    await addQuote(req.body)
+    res.status(200).end();
+  } catch (e) {
+    res.status(500).send(e.message);
+  }
+});
+
+app.delete("/api/myQuotes", async (req, res) => {
+  try {
+    await deleteOneQuote(req.body);
+    res.status(204).json().end();
   } catch (e) {
     res.status(500).send(e);
   }

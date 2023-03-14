@@ -32,7 +32,6 @@
     font-size: large;
   }
 
-
   @media screen and (min-width: 700px) {
     .search-input {
         width: 15rem;

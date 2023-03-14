@@ -38,3 +38,8 @@ export const deleteQuote = async (name:string, quote : Quotes) => {
   await User.updateOne({userName : name}, {$set: {favQuotes: user.favQuotes}});
   return user.favQuotes;
 };
+
+process.on('SIGINT', () => {
+  conn.close();
+  process.exit();
+});
