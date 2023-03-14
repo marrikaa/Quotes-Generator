@@ -17,6 +17,7 @@ const InputField = (props : PropType ) => {
     const passwordHandler= (event: React.FormEvent<HTMLInputElement>) => {
         setPassword(event!.currentTarget.value);
     };
+
   return (
     <div className='inputField'>
         <h2>{formName} Form <hr /></h2>
@@ -24,6 +25,8 @@ const InputField = (props : PropType ) => {
         <input onChange={userNameHandler} type='text' placeholder='Enter userName'></input>
         <label htmlFor='lastName'><b>Password</b></label>
         <input onChange={passwordHandler} id='lastName' type="password" placeholder='Enter password'></input>
+        {formName==="Register"&& <><label htmlFor='lastName'><b>Password</b></label>
+        <input onChange={passwordHandler} id='lastName' type="password" placeholder='Enter password'></input></>}
         <button onClick={buttonHandler}>{formName}</button>
   </div>)
 }

@@ -1,7 +1,8 @@
 /* eslint-disable no-console */
 import express from "express";
-import { getUsers, addUser  } from "./db/db";
+import { getUsers, addUser, deleteUser, getOneUser, updateUser, deleteQuote  } from "./db/db";
 import fetch from "node-fetch-commonjs";
+import { User } from "./types";
 
 type QuotesType ={
   quote : string,
@@ -18,13 +19,14 @@ const port = 3001;
 
 app.use(express.json());
 
-const cors=require("cors");
+const cors = require("cors");
 const corsOptions ={
    origin:'*', 
    credentials:true,           
    optionSuccessStatus:200,
 }
 app.use(cors(corsOptions))
+
 
 app.get("/", async (req, res) => {
   try {
@@ -42,6 +44,7 @@ app.get("/api/users/", async (req, res) => {
     res.status(500).send(e);
   }
 });
+
 let quoteDB="https://gist.githubusercontent.com/camperbot/5a022b72e96c4c9585c32bf6a75f62d9/raw/e3c6895ce42069f0ee7e991229064f167fe8ccdc/quotes.json";
 app.get("/api/quotes/", async (req, res) => {
   try {
@@ -53,11 +56,61 @@ app.get("/api/quotes/", async (req, res) => {
   }
 });
 
+
 app.post("/api/users/", async (req, res) => {
   try {
-    const newUser = req.body;
+    const newUser : User = {
+      userName: req.body.user,
+      password: req.body.password,
+      favQuotes: [],
+    }
     await addUser(newUser);
     res.status(200).json(newUser).end();
+  } catch (e) {
+    res.status(500).send(e);
+  }
+});
+
+app.delete("/api/users/:userName", async (req, res) => {
+  try {
+    await deleteUser(req.params.userName);
+    res.status(204).end();
+  } catch (e) {
+    res.status(500).send(e);
+  }
+});
+
+app.get("/api/users/:userName", async (req, res) => {
+  try {
+    const user = await getOneUser(req.params.userName);
+    res.status(200).json(user).end();
+  } catch (e) {
+    res.status(500).send(e);
+  }
+});
+
+app.get("/api/users/:userName/favQuotes", async (req, res) => {
+  try {
+    const user = await getOneUser(req.params.userName);
+    res.status(200).json(user.favQuotes).end();
+  } catch (e) {
+    res.status(500).send(e);
+  }
+});
+
+app.post("/api/users/:userName/favQuotes", async (req, res) => {
+  try {
+    await updateUser(req.params.userName,req.body)
+    res.status(200).end();
+  } catch (e) {
+    res.status(500).send(e.message);
+  }
+});
+
+app.delete("/api/users/:userName/favQuotes", async (req, res) => {
+  try {
+    const result=await deleteQuote(req.params.userName, req.body);
+    res.status(204).json(result).end();
   } catch (e) {
     res.status(500).send(e);
   }
@@ -66,3 +119,4 @@ app.post("/api/users/", async (req, res) => {
 app.listen(port, () =>
   console.log(`Example app listening at http://localhost:${port}`)
 );
+

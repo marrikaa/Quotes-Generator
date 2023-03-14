@@ -1,21 +1,23 @@
 import { useEffect, useState } from "react";
 import { QuotesType } from "../../types";
 import Quotes from "../Quotes/Quotes";
-import SearchBar from "../SearchBar/SearchBar";
+import { getQuotes } from "../../Client/client";
 
 
-function Home() {
+type PropType = {
+  isLogin : boolean,
+  userName:string
+}
+
+const Home = (props :PropType) => {
+  const {isLogin, userName } = props
   const [quotesArray,setQuotesArray]=useState<QuotesType[]>([])
 
-  const fetchQuotes = async () =>{
-    const response = await fetch("http://localhost:3001/api/quotes")
-    const parsed = await response.json()
-    setQuotesArray(parsed)
-  }
+  const setQuotes = async () => setQuotesArray(await getQuotes());
   
-    useEffect(()=> {
-        fetchQuotes();
-    } ,[])
+  useEffect(()=> {
+    setQuotes();
+  } ,[])
 
   return (
     <div className="App">
@@ -24,7 +26,7 @@ function Home() {
     </header>
       <body className="App-header" >
          <div id="quote-box" >
-          {quotesArray.map((quotes : QuotesType) => <Quotes quote={quotes.quote} author={quotes.author} />)}
+          {quotesArray.map((quotes : QuotesType) => <Quotes quote={quotes} isLogin={isLogin} isForFav={false} name={userName}/>)}
       </div>
       </body>
     </div>

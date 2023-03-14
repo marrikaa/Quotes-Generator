@@ -2,42 +2,41 @@ import React, { useEffect, useState } from 'react'
 import { QuotesType } from '../../types';
 import Quotes from '../Quotes/Quotes';
 import SearchBar from '../SearchBar/SearchBar';
+import { getQuotes } from '../../Client/client';
 
-const SearchPage = () => {
+type PropType = {
+  isLogin : boolean,
+  userName:string
+}
+const SearchPage = (props :PropType) => {
+  const {isLogin, userName } = props
+  const [quotesArray,setQuotesArray] = useState<QuotesType[]>([])
+  const [searchResult,setSearchResult] = useState<QuotesType[]>([])
+  const [searchForQuote, setSearchForQuote] =useState <string> ("");
 
-    const [quotesArray,setQuotesArray]=useState<QuotesType[]>([])
-    const [searchResult,setSearchResult]=useState<QuotesType[]>([])
-    const [searchForQuote, setSearchForQuote] =useState <string> ("");
+  const setQuotes = async () => setQuotesArray(await getQuotes());
 
-  
-  
-    const fetchQuotes = async () =>{
-      const response = await fetch("http://localhost:3001/api/quotes")
-      const parsed = await response.json()
-      setQuotesArray(parsed)
-    }
-    
   useEffect(()=> {
-      fetchQuotes();
-  } ,[])
+    setQuotes() 
+   } ,[])
     
-    const getQuotes = () => {
-      const filteredQuotes = quotesArray.filter(quotes => (quotes.quote).includes(searchForQuote));
-      setSearchResult(filteredQuotes);
-    }
-    
-    return (
-      <div className="App">
-        <header>
-          <SearchBar setSearchQuote={setSearchForQuote} searchHandler={getQuotes} />
-      </header>
-        <body className="App-header" >
-           <div id="quote-box" >
-            {searchResult.map((quotes : QuotesType) => <Quotes quote={quotes.quote} author={quotes.author} />)}
-        </div>
-        </body>
-      </div>
-    )
+  const getSearchQuotes = () => {
+    const filteredQuotes = quotesArray.filter(quotes => (quotes.quote).includes(searchForQuote));
+    setSearchResult(filteredQuotes);
   }
+    
+  return (
+    <div className="App">
+      <header>
+        <SearchBar setSearchQuote={setSearchForQuote} searchHandler={getSearchQuotes} />
+    </header>
+      <body className="App-header" >
+          <div id="quote-box" >
+          {searchResult.map((quotes : QuotesType) => <Quotes quote={quotes} isLogin={isLogin} isForFav={false} name={userName} />)}
+      </div>
+      </body>
+    </div>
+  )
+}
 
 export default SearchPage

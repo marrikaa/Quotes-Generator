@@ -4,7 +4,6 @@ export type Quotes = {
 }
 
 export type User = {
-  id: string;
   userName: string;
   password: string;
   favQuotes: Quotes[];
