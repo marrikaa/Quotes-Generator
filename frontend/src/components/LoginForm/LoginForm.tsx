@@ -31,10 +31,15 @@ export const LoginForm = (props : PropType) => {
       alert("userName or password is inccorect");
     }
   }
+  const handleKeyPress = (event :any ) => {
+    if(event.key === 'Enter'){
+      buttonHandler();
+    }
+  }
   const capitalize = (st :string) :string => st && st[0].toUpperCase() + st.slice(1)
 
   return (
-    <div>
+    <div onKeyDownCapture={handleKeyPress}>
      {!isLogin&&<InputField setUserName={setUser} setPassword={setPassword} buttonHandler={buttonHandler} formName='Login' />}
       {isLogin && <p className="user-welcome">Welcome, dear {capitalize(user)}!</p>}
     </div>

@@ -10,6 +10,7 @@ type PropType = {
 
 const InputField = (props : PropType ) => {
     const { setUserName , setPassword, buttonHandler, formName } = props;
+    
     const userNameHandler = (event: React.FormEvent<HTMLInputElement>) => {
         setUserName(event!.currentTarget.value);
     };

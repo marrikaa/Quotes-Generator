@@ -1,12 +1,11 @@
 import * as mongoose from "mongoose";
-import { Quotes } from "../types";
+import { QuotesType } from "../types";
 import { IQuotes, Quote } from "./QuotesSchema";
 
 
 const connstr = "mongodb://localhost/myDB";
 mongoose.connect(connstr);
 const conn = mongoose.connection;
-
 
 export const addQuote = async (quote: IQuotes) => {
   const newUser = new Quote(quote);
@@ -18,7 +17,7 @@ export const getQuotes= async () => {
   return users;
 };
 
-export const deleteOneQuote = async (quote : Quotes) => {
+export const deleteOneQuote = async (quote : QuotesType) => {
  await Quote.deleteOne({ quote: quote.quote});
 };
 

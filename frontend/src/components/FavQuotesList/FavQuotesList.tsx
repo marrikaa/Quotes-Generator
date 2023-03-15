@@ -15,11 +15,11 @@ const FavQuotesList = (props :PropType) => {
     const [myquote, setMyQuotes] = useState<string>("")
     const [myAuthor, setMyAuthor] = useState<string>("")
 
-    const setQuotesForUser= async () => await setQuotesArray(await getUsersQuotes(userName));
+    const setQuotesForUser = async () => await setQuotesArray(await getUsersQuotes(userName));
 
     useEffect( () => {
         setQuotesForUser();
-    } ,[])
+    },[])
     
     const removeCklickHandler = async(event : any) => {
         const deletedQuote : QuotesType= JSON.parse(event.currentTarget.value);
@@ -48,17 +48,25 @@ const FavQuotesList = (props :PropType) => {
         author: myAuthor
       })
       const array = [...quotesArray];
-      array.unshift({ quote : myquote,  author: myAuthor}) 
+      array.unshift({ quote : myquote,  author: myAuthor});
       setQuotesArray(array);
+      setMyAuthor("");
+      setMyQuotes("");
+    }
+    
+    const handleKeyPress = (event :any ) => {
+      if(event.key === 'Enter'){
+        postQuoteHandler();
+      }
     }
 
     return (
       <div className="App">
         <p className="fav-quotes">My favourite qoutes list</p>
-        <div className='post-Quotes'>
-            <p className="post-quotes">Add your favorite quote</p>
-            <textarea onChange={quoteHandler} className='quote-input'placeholder='Quote'></textarea>
-            <textarea onChange={authorHandler} className='author-input' placeholder='Author' ></textarea>
+        <p className="post-quotes">Add your favorite quote</p>
+        <div className='post-Quotes' onKeyUpCapture={handleKeyPress}>
+            <textarea onChange={quoteHandler} value={myquote} className='quote-input'placeholder='Quote' id="txt-quote"></textarea>
+            <textarea onChange={authorHandler} value={myAuthor} className='author-input' placeholder='Author' id="txt-author" ></textarea>
             <button onClick={postQuoteHandler}>Create</button>
         </div>
         

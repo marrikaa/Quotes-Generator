@@ -2,18 +2,12 @@
 import express from "express";
 import { getUsers, addUser, deleteUser, getOneUser, updateUser, deleteQuote  } from "./Mongo/db";
 import fetch from "node-fetch-commonjs";
-import { User } from "./types";
+import { User, QuotesType } from "./types";
 import { addQuote, deleteOneQuote, getQuotes } from "./Mongo/dbForQuotes";
-
-type QuotesType ={
-  quote : string,
-  author:string,
-}
 
 type Quotes = {
   quotes: QuotesType[];
 } 
-
 
 const app = express();
 const port = 3001;
@@ -27,15 +21,6 @@ const corsOptions ={
    optionSuccessStatus:200,
 }
 app.use(cors(corsOptions))
-
-
-app.get("/", async (req, res) => {
-  try {
-    res.status(200).json("heyy").end();
-  } catch (e) {
-    res.status(500).send(e);
-  }
-});
 
 app.get("/api/users/", async (req, res) => {
   try {

@@ -1,4 +1,4 @@
-export type Quotes = {
+export type QuotesType = {
     quote : string,
     author : string,
 }
@@ -6,5 +6,5 @@ export type Quotes = {
 export type User = {
   userName: string;
   password: string;
-  favQuotes: Quotes[];
+  favQuotes: QuotesType[];
 }

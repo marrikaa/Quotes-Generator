@@ -13,6 +13,7 @@ const NavBar = (props : PropType) => {
     alert("Do you want to log out?")
     setIsLogin(false);
   }
+  
   return (
     <div className='navbar'>
      <Link to='/' className='link nav-item'><div >Home</div></Link>

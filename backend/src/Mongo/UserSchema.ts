@@ -1,11 +1,11 @@
 import { model, Schema } from "mongoose";
-import { Quotes } from "../types";
+import { QuotesType } from "../types";
 
 
 export interface IUser {
   userName: string;
   password: string;
-  favQuotes: Quotes[];
+  favQuotes: QuotesType[];
 }
 
 export const userSchema = new Schema<IUser>({

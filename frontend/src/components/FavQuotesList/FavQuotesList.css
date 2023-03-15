@@ -31,6 +31,9 @@ textarea{
     height: 10vh;
     font-size: 20px
 }
+.hidden{
+    visibility: hidden;
+}
 
 @media screen and (min-width: 700px) {
     .post-Quotes {

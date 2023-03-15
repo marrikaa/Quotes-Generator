@@ -25,9 +25,14 @@ const SearchPage = (props :PropType) => {
     setSearchResult(filteredQuotes);
   }
     
+  const handleKeyPress = (event :any ) => {
+    if(event.key === 'Enter'){
+      getSearchQuotes();
+    }
+  }
   return (
     <div className="App">
-      <header>
+      <header onKeyDownCapture={handleKeyPress}>
         <SearchBar setSearchQuote={setSearchForQuote} searchHandler={getSearchQuotes} />
     </header>
       <body className="App-header" >

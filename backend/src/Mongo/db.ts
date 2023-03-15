@@ -1,5 +1,5 @@
 import * as mongoose from "mongoose";
-import { Quotes } from "../types";
+import { QuotesType } from "../types";
 import { IUser, User } from "./UserSchema";
 
 const connstr = "mongodb://localhost/myDB";
@@ -26,12 +26,12 @@ export const getOneUser = async (name:string) => {
   return user;
 };
 
-export const updateUser = async (name:string, quote:Quotes) => {
+export const updateUser = async (name:string, quote: QuotesType) => {
   const user = await User.findOne({userName : name});
   await User.updateOne({userName : name}, {$set: {favQuotes: user.favQuotes.concat(quote)}})
 };
 
-export const deleteQuote = async (name:string, quote : Quotes) => {
+export const deleteQuote = async (name:string, quote : QuotesType) => {
   const user = await User.findOne({userName : name});
   const indexOfQuote = user.favQuotes.findIndex(q => q.author === quote.author && q.quote === quote.quote );
   user.favQuotes.splice(indexOfQuote, 1);

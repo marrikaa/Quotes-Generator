@@ -1,7 +1,4 @@
 import { model, Schema } from "mongoose";
-import { Quotes } from "../types";
-
-
 
 export interface IQuotes {
     quote : string,

@@ -18,7 +18,6 @@ const postUser = async(props : User, setIsLogin: (p:boolean)=> void) : Promise<v
         setIsLogin(false);
         return;
     }
-
     fetch('http://localhost:3001/api/users', {
         method: "POST",
         body : JSON.stringify({
@@ -44,8 +43,8 @@ const posQuotesForUser = async(userName : string, quotes : QuotesType,) : Promis
 }
 
 const getUsersQuotes = async (name : String) : Promise<QuotesType[]> =>{
-    let usersQuotes :QuotesType[] = []
-    if(name !== ""){
+    let usersQuotes : QuotesType[] = []
+    if(name !== "" || name !== undefined){
         usersQuotes= await fetch(`http://localhost:3001/api/users/${name}/favQuotes`).then(response => response.json())
     }
     return usersQuotes;   
