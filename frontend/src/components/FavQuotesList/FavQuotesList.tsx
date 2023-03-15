@@ -62,7 +62,7 @@ const FavQuotesList = (props :PropType) => {
 
     return (
       <div className="App">
-        <p className="fav-quotes">My favourite qoutes list</p>
+        <p className="fav-quotes">My favourite quotes list</p>
         <p className="post-quotes">Add your favorite quote</p>
         <div className='post-Quotes' onKeyUpCapture={handleKeyPress}>
             <textarea onChange={quoteHandler} value={myquote} className='quote-input'placeholder='Quote' id="txt-quote"></textarea>
