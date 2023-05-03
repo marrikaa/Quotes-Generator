@@ -6,16 +6,14 @@ const getUsers = async() : Promise<User[]> =>{
     return users;   
 }
 
-const postUser = async(props : User, setIsLogin: (p:boolean)=> void) : Promise<void> =>{
+const postUser = async(props : User) : Promise<void> =>{
     const users = await getUsers();
     if(props.userName === "" || props.password === ""){
         alert("Please fill the data!");
-        setIsLogin(false);
         return;
     }
     if(users.filter(u => u.userName === props.userName).length === 1){
         alert("user name already exist, please use new one!");
-        setIsLogin(false);
         return;
     }
     fetch('http://localhost:3001/api/users', {
@@ -29,17 +27,23 @@ const postUser = async(props : User, setIsLogin: (p:boolean)=> void) : Promise<v
             'Content-type': 'application/json; charset=UTF-8'
         }
     })
-    setIsLogin(true);
+    window.sessionStorage.setItem('user', JSON.stringify(props.userName));
 }
 
 const posQuotesForUser = async(userName : string, quotes : QuotesType,) : Promise<void> =>{
-    fetch(`http://localhost:3001/api/users/${userName}/favQuotes`, {
-        method: "POST",
-        body : JSON.stringify(quotes),
-        headers: {
-            'Content-type': 'application/json; charset=UTF-8'
-        }
-    })
+    const userQuotes = await getUsersQuotes(userName);
+    if(userQuotes.filter(q => q.author === quotes.author && q.quote === quotes.quote)){
+        alert("This quote is already in your favourite list!")
+    }else {
+        fetch(`http://localhost:3001/api/users/${userName}/favQuotes`, {
+            method: "POST",
+            body : JSON.stringify(quotes),
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8'
+            }
+        })  
+    }
+    
 }
 
 const getUsersQuotes = async (name : String) : Promise<QuotesType[]> =>{

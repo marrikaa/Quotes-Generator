@@ -5,12 +5,11 @@ import { getQuotes } from "../../Client/client";
 import './Home.css'
 
 type PropType = {
-  isLogin : boolean,
-  userName:string
+  userName: string
 }
 
 const Home = (props :PropType) => {
-  const {isLogin, userName } = props
+  const {userName } = props
   const [quotesArray, setQuotesArray]=useState<QuotesType[]>([]);
 
   const setQuotes = async () => await getQuotes().then(response => setQuotesArray(response));
@@ -26,7 +25,7 @@ const Home = (props :PropType) => {
     </header>
       <body className="App-header" >
          <div id="quote-box" >
-          {quotesArray.map((quotes : QuotesType) => <Quotes quote={quotes} isLogin={isLogin} isForHome={true} isForFav={false} name={userName}/>)}
+          {quotesArray.map((quotes : QuotesType) => <Quotes quote={quotes} isForHome={true} isForFav={false} name={userName}/>)}
       </div>
       </body>
     </div>

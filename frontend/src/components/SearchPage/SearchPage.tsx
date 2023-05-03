@@ -5,11 +5,10 @@ import SearchBar from '../SearchBar/SearchBar';
 import { getQuotes } from '../../Client/client';
 
 type PropType = {
-  isLogin : boolean,
   userName:string
 }
 const SearchPage = (props :PropType) => {
-  const {isLogin, userName } = props
+  const { userName } = props
   const [quotesArray,setQuotesArray] = useState<QuotesType[]>([])
   const [searchResult,setSearchResult] = useState<QuotesType[]>([])
   const [searchForQuote, setSearchForQuote] =useState <string> ("");
@@ -21,7 +20,7 @@ const SearchPage = (props :PropType) => {
    } ,[])
     
   const getSearchQuotes = () => {
-    const filteredQuotes = quotesArray.filter(quotes => (quotes.quote).includes(searchForQuote));
+    const filteredQuotes = quotesArray.filter(quotes => (quotes.quote).includes(searchForQuote) || (quotes.author).includes(searchForQuote));
     setSearchResult(filteredQuotes);
   }
     
@@ -37,7 +36,7 @@ const SearchPage = (props :PropType) => {
     </header>
       <body className="App-header" >
           <div id="quote-box" >
-          {searchResult.map((quotes : QuotesType) => <Quotes quote={quotes} isLogin={isLogin} isForHome={false} isForFav={false} name={userName} />)}
+          {searchResult.map((quotes : QuotesType) => <Quotes quote={quotes} isForHome={false} isForFav={false} name={userName} />)}
       </div>
       </body>
     </div>

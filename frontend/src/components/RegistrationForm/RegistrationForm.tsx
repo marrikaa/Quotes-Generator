@@ -4,18 +4,18 @@ import { postUser } from '../../Client/client';
 import './Registration.css'
 
 type PropType = {
-  isLogin:boolean;
-  setIsLogin: (p :boolean) => void;
+  userName:string;
   setUserName: (str: string)=> void;
 };
 
 const RegistrationForm = (props :PropType) => {
-  const {isLogin, setIsLogin, setUserName} =props
+  const { userName, setUserName} =props
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
 
   const buttonHandler = () => {
-    postUser({userName : user, password: password, favQuotes: []}, setIsLogin);
+    postUser({userName : user, password: password, favQuotes: []});
+    window.sessionStorage.setItem('user', JSON.stringify(user));
     setUserName(user);
   }
 
@@ -26,8 +26,8 @@ const RegistrationForm = (props :PropType) => {
   }
   return (
     <div onKeyDownCapture={handleKeyPress}>
-      {!isLogin &&<InputField setUserName={setUser} setPassword={setPassword} buttonHandler={buttonHandler} formName='Registration' />}
-      {isLogin && <p className="new-user-welcome">Registered succesfully, Welcome to our Quotes Generator</p>}
+      {userName === "" &&<InputField setUserName={setUser} setPassword={setPassword} buttonHandler={buttonHandler} formName='Register' />}
+      {userName !== "" && <p className="new-user-welcome">Registered succesfully, Welcome to our Quotes Generator</p>}
     </div>
   )
 }

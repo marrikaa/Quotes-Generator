@@ -5,13 +5,12 @@ import { User } from '../../types';
 import './LoginForm.css'
 
 type PropType = {
-  isLogin : boolean;
-  setIsLogin: (p :boolean) => void;
+  userName :string;
   setUserName: (str: string)=> void;
 };
 
 export const LoginForm = (props : PropType) => {
-  const { isLogin, setIsLogin, setUserName } = props
+  const { userName, setUserName } = props
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
   const [users, setUsers] = useState<User[]>([]);
@@ -26,7 +25,7 @@ export const LoginForm = (props : PropType) => {
   const buttonHandler = () => {
     if(users.filter((u :User) => u.userName === user && u.password === password).length === 1 ){
       setUserName(user);
-      setIsLogin(true)
+      window.sessionStorage.setItem('user', JSON.stringify(user));
     }else{
       alert("userName or password is inccorect");
     }
@@ -40,8 +39,8 @@ export const LoginForm = (props : PropType) => {
 
   return (
     <div onKeyDownCapture={handleKeyPress}>
-     {!isLogin&&<InputField setUserName={setUser} setPassword={setPassword} buttonHandler={buttonHandler} formName='Login' />}
-      {isLogin && <p className="user-welcome">Welcome, dear {capitalize(user)}!</p>}
+     {userName === "" &&<InputField setUserName={setUser} setPassword={setPassword} buttonHandler={buttonHandler} formName='Login' />}
+      {userName !== "" && <p className="user-welcome">Welcome, dear {capitalize(user)}!</p>}
     </div>
   )
 }

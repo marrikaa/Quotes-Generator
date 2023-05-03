@@ -1,5 +1,4 @@
 import { QuotesType } from "../types"
-import { User } from "../types"
 
 
 const postQuotes = async(props : QuotesType) : Promise<void> =>{

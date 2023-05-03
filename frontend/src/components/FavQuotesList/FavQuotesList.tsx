@@ -15,11 +15,13 @@ const FavQuotesList = (props :PropType) => {
     const [myquote, setMyQuotes] = useState<string>("")
     const [myAuthor, setMyAuthor] = useState<string>("")
 
-    const setQuotesForUser = async () => await setQuotesArray(await getUsersQuotes(userName));
+    const setQuotesForUser = async () => {
+      await setQuotesArray(await getUsersQuotes(userName))
+    };
 
     useEffect( () => {
         setQuotesForUser();
-    },[])
+    }, [userName])
     
     const removeCklickHandler = async(event : any) => {
         const deletedQuote : QuotesType= JSON.parse(event.currentTarget.value);
@@ -74,7 +76,6 @@ const FavQuotesList = (props :PropType) => {
             {quotesArray && quotesArray.map((quotes : QuotesType) => 
             <Quotes 
                 quote={quotes} 
-                isLogin={true} 
                 isForFav={true} 
                 isForHome={false}
                 removeCklickHandler={removeCklickHandler} />)}
